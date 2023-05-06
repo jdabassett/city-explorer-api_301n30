@@ -14,28 +14,27 @@ const app = express();
 app.use(express.json());
 app.use(cors({origin: '*'}));
 
-// class to generate object
+// class to generate forecast array
+// input city object with forecast data
+// run getItem() method to return array of formated forecast results
 class Forecast {
   constructor(cityObject) {
     if (typeof cityObject !== 'object') throw new Error('List type error');
-    this.cityName = cityObject.city_name || null;
-    this.forecast = cityObject.data || null;
+    this.cityObject = cityObject || {};
+    this.forecastArray = cityObject.data || null;
   }
-
-  // What are Items defined as on our App?  Just on object with name and description properties.
+  // method to return forecast array
   getItems() {
-    return this.forecast.map(item => ({
-      name: this.cityName,
-      description: `Low of ${item.low_temp}, high of${item.high_temp} with ${item.weather.description}`
+    return this.forecastArray.map(item => ({
+      name: item.datetime,
+      description: `Low of ${item.low_temp}, high of ${item.high_temp} with ${item.weather.description.toLowerCase()}`
     }));
   }
 }
 
 
-// get router
-app.get('/', async (req,res)=>{
-  // const lat = req.query.lat;
-  // const lon = req.query.lon;
+// get weather router
+app.get('/weather', async (req,res)=>{
   const searchQuery  = `${req.query.searchQuery}`.toLowerCase();
 
   try {
@@ -44,17 +43,23 @@ app.get('/', async (req,res)=>{
     if (record === null || record===undefined){
       return res.status(404).json({message:'Couldn\'t find record'});
     }
-    return res.status(200).json(record);
+    // generate forecast object
+    let forecastObject = new Forecast(record);
+    let forecastArray = forecastObject.getItems();
+    //return get request of forecast array
+    return res.status(200).json({data:forecastArray});
 
   } catch (error){
-    return res.status(404).json({message:error.message});
+    return res.status(405).json({message:error.message});
   };
 });
+
 
 // syntax error
 app.get('*', (req, res) => {
   res.status(404).send('not found');
 });
+
 
 // error router
 app.use((error, req, res) => {
