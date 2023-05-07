@@ -13,8 +13,9 @@ This will be the back-end server for the City-Explorer website made by Jacob Bas
 
 ## Architecture
 
-<!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
-Before submit
+![Lab07 Wireframe](./images/lab07_wireframe.png)
+ * This wireframe is a plan how the REST requests will work between our server and frontend app.
+ * Made with Jelani.
 
 ## Change Log
 
@@ -25,15 +26,28 @@ Pending
 
 ## Credit and Collaborations
 
-<!-- Give credit (and a link) to other people or resources that helped -->
-Pending
-
+[Jelani Rhinehart](https://github.com/Jchips)
+ * Made the wireframe with me for Lab07
 
 
 ## Development Estimates
 
-Name of feature: 
-Estimate of time needed to complete: 
-Start time: 
-Finish time: 
-Actual time needed to complete: 
+Name of feature: Set Up Server Repository
+Estimate of time needed to complete: 03:00
+Start time: 02:00
+Finish time: 07:00
+Actual time needed to complete: 05:00
+
+Name of feature: Accept Get Request and Return Formated Response
+Estimate of time needed to complete: 01:00
+Start time: 07:00
+Finish time: 09:00
+Actual time needed to complete: 02:00
+
+Name of feature: Display Error
+Estimate of time needed to complete: 01:00
+Start time: 09:00
+Finish time: 10:00
+Actual time needed to complete: 01:00
+
+
