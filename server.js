@@ -9,7 +9,6 @@ const axios = require('axios');
 
 //import global variables
 const port = process.env.PORT || 3001;
-const SERVER = process.env.SERVER;
 const WEATHERKEY_TOKEN = process.env.WEATHERKEY;
 const TMDBKEY_TOKEN = process.env.TMDBKEY;
 
@@ -79,6 +78,7 @@ app.get('/weather', async (req,res,next)=>{
     let forecastArray = forecastObject.getItems();
     //return get request of forecast array
     return res.status(200).send(forecastArray);
+    // return res.status(404).json({message:'not found'});
 
   } catch (error){
     // throw new Error('List type error');
@@ -129,6 +129,7 @@ app.get('/movies', async (req,res,next)=>{
 
     //return get request of forecast array
     return res.status(200).send(moviesArray);
+    // return res.status(404).json({message:'not found'});
 
   } catch (error){
     // throw new Error('List type error');
