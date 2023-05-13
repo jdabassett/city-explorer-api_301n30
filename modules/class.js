@@ -6,7 +6,7 @@ class Forecast {
     if (typeof cityObject !== 'object') throw new Error('List type error');
     this.cityObject = cityObject || {};
     this.forecastArray = cityObject.data.data || [];
-    this.weekdayArray = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+    this.weekdayArray = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
     this.monthArray = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   }
   //change the format of the day

@@ -6,6 +6,7 @@ const express = require('express');
 const cors = require('cors');
 const weatherRequest = require('./modules/weather.js');
 const moviesRequest = require('./modules/movies.js');
+const errorHandler = require('./modules/error.js');
 
 //import global variables
 const port = process.env.PORT || 3001;
@@ -17,25 +18,19 @@ const app = express();
 app.use(express.json());
 app.use(cors({origin: '*'}));
 
-
 // get weather router
 app.get('/weather', weatherRequest);
 
 // get movies router
 app.get('/movies', moviesRequest);
 
+// first error router
+app.get('*', errorHandler);
 
-// syntax error
-app.get('*', (req, res) => {
-  res.status(404).json({message:'not found'});
+// last error router
+app.use((err, req, res)=>{
+  res.status(500).json({message:'record not found in database'});
 });
-
-
-// error router
-app.use((error, req, res) => {
-  res.status(404).json({message:error.message});
-});
-
 
 app.listen(port, ()=>(console.log(`Listen on the port ${port}...`)));
 

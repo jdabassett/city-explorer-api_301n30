@@ -8,26 +8,27 @@ const {Forecast} = require('./class.js');
 
 
 
-async function weatherRequest(req,res,next){
+function weatherRequest(req,res,next){
   const {lat,lon} = req.query;
   let weatherQuery = {
     url:`http://api.weatherbit.io/v2.0/forecast/daily?key=${WEATHERKEY_TOKEN}&lat=${lat}&lon=${lon}`,
     method:'GET'};
 
-  try {
+  axios(weatherQuery)
+    .then(res => new Forecast(res))
+    .then(forecastObject => forecastObject.getItems())
+    .then(forecastArray => res.status(200).send(forecastArray))
+    .catch(err => next(err));
 
-    // let weatherResponse = require('./data/seattle_weather.json');
-    let weatherResponse = await axios(weatherQuery);
-
-    // generate forecast object
-    let forecastObject = new Forecast(weatherResponse);
-    let forecastArray = forecastObject.getItems();
-    return res.status(200).send(forecastArray);
-    // return res.status(404).json({message:'not found'});
-
-  } catch (error){
-    next(error);
-  }
+  // old way of doing it
+  // try {
+  //   let weatherResponse = await axios(weatherQuery);
+  //   let forecastObject = new Forecast(weatherResponse);
+  //   let forecastArray = forecastObject.getItems();
+  //   return res.status(200).send(forecastArray);
+  // } catch (error){
+  //   next(error);
+  // }
 }
 
 
