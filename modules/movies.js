@@ -16,6 +16,7 @@ async function moviesRequest (req,res,next) {
   axios(moviesQuery)
     .then(res => new MoviesFormated(res))
     .then(moviesObject => moviesObject.getItems().slice(0,20))
+    // .then(moviesArray => res.status(404).json({message:'movies error'}))
     .then(moviesArray => res.status(200).send(moviesArray))
     .catch(error => next(error));
   

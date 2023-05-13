@@ -17,6 +17,7 @@ function weatherRequest(req,res,next){
   axios(weatherQuery)
     .then(res => new Forecast(res))
     .then(forecastObject => forecastObject.getItems())
+    // .then(forecastArray => res.status(404).json({message:'movies error'}))
     .then(forecastArray => res.status(200).send(forecastArray))
     .catch(err => next(err));
 
