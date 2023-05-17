@@ -11,7 +11,7 @@ function weatherRequest(req,res,next){
   const {lat,lon} = req.query;
   let key = `weather?lat=${lat}&lon=${lon}`;
   let weatherQuery = {
-    url:`http://api.weatherbit.io/v2.0/forecast/daily?key=${WEATHERKEY_TOKEN}&lat=${lat}&lon=${lon}`,
+    url:`http://api.weatherbit.io/v2.0/forecast/daily?key=${WEATHERKEY_TOKEN}&lat=${lat}&lon=${lon}&days=7`,
     method:'GET'};
 
   if (cache[key] && (Date.now()-cache[key].timestamp)<10000000){
@@ -41,14 +41,14 @@ class Forecast {
     if (typeof cityObject !== 'object') throw new Error('List type error');
     this.cityObject = cityObject || {};
     this.forecastArray = cityObject.data.data || [];
-    this.weekdayArray = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    this.weekdayArray = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
     this.monthArray = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   }
   //change the format of the day
   formateDay (dateStr) {
     let dateObject = new Date(dateStr);
     let weekday = this.weekdayArray[dateObject.getDay()];
-    let monthDay = dateObject.getDate();
+    let monthDay = dateObject.getDate()+1;
     let month = this.monthArray[dateObject.getMonth()];
     return `${weekday}, ${month} ${monthDay}`;
   }

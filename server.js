@@ -7,6 +7,7 @@ const cors = require('cors');
 const weatherRequest = require('./modules/weather.js');
 const moviesRequest = require('./modules/movies.js');
 const errorHandler = require('./modules/error.js');
+const businessesRequest = require('./modules/businesses.js');
 
 //import global variables
 const port = process.env.PORT || 3001;
@@ -23,6 +24,9 @@ app.get('/weather', weatherRequest);
 
 // get movies router
 app.get('/movies', moviesRequest);
+
+// get businesses router
+app.get('/businesses', businessesRequest);
 
 // first error router
 app.get('*', errorHandler);

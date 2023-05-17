@@ -26,7 +26,7 @@ async function moviesRequest (req,res,next) {
         cache[key] = {};
         cache[key].timestamp = Date.now();
         cache[key].data = moviesArray;
-        console.log('movies-',cache[key].timestamp);
+        // console.log('movies-',cache[key].timestamp);
         res.status(200).send(moviesArray);
       })
       .catch(error => next(error));
