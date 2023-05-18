@@ -14,8 +14,8 @@ function weatherRequest(req,res,next){
     url:`http://api.weatherbit.io/v2.0/forecast/daily?key=${WEATHERKEY_TOKEN}&lat=${lat}&lon=${lon}&days=7`,
     method:'GET'};
 
-  if (cache[key] && (Date.now()-cache[key].timestamp)<10000000){
-    // console.log('weather-found cache');
+  if (cache[key] && (Date.now()-cache[key].timestamp)<100000000){
+    console.log('weather-found cache');
     res.status(200).send(cache[key].data);
   } else{
     // console.log('weather-requested new, added to cache');

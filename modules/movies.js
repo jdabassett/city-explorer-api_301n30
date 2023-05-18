@@ -14,8 +14,8 @@ async function moviesRequest (req,res,next) {
     url:`https://api.themoviedb.org/3/search/movie?api_key=${TMDBKEY_TOKEN}&query=${searchQuery}`,
     method:'GET'};
 
-  if (cache[key] && (Date.now()-cache[key].timestamp<10000000)){
-    console.log('found in cache');
+  if (cache[key] && (Date.now()-cache[key].timestamp<100000000)){
+    console.log('movies- found in cache');
     res.status(200).send(cache[key].data);
   } else {
     axios(moviesQuery)
@@ -26,7 +26,7 @@ async function moviesRequest (req,res,next) {
         cache[key] = {};
         cache[key].timestamp = Date.now();
         cache[key].data = moviesArray;
-        // console.log('movies-',cache[key].timestamp);
+        console.log('movies-',cache[key].timestamp);
         res.status(200).send(moviesArray);
       })
       .catch(error => next(error));

@@ -17,7 +17,7 @@ function businessesRequest(req,res,next){
   let url = `https://api.yelp.com/v3/businesses/search?sort_by=best_match&limit=20&location=${searchQuery}`;
   // console.log(url);
   if (cache[key] && (Date.now()-cache[key].timestamp<100000000)){
-    // console.log('found in cache')
+    console.log('businesses- found in cache')
     res.status(200).send(cache[key].data);
   } else {
     // console.log('made new axios request');
@@ -29,7 +29,7 @@ function businessesRequest(req,res,next){
         cache[key] = {};
         cache[key].timestamp = Date.now();
         cache[key].data = businessesArray;
-        // console.log('movies-',cache[key].timestamp);
+        console.log('businesses-',cache[key].timestamp);
         res.status(200).send(businessesArray);
       })
       .catch(error => next(error));
