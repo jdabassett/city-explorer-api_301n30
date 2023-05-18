@@ -7,9 +7,6 @@
 
 This will be the back-end server for the City-Explorer website made by Jacob Bassett for his Code Fellows 301 class.
 
-## Getting Started
-
-<!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
 
 ## Architecture
 
@@ -17,17 +14,18 @@ This will be the back-end server for the City-Explorer website made by Jacob Bas
  * This wireframe is a plan how the REST requests will work between our server and frontend app.
  * Made with Jelani.
 
-## Change Log
+![Lab10 Wireframe](./images/lab10_wireframe.png)
+ * This is a full wireframe of how our app should work. The latest update being with the cacheing of data.
+ * Made with Zeegii
 
-<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
-
-01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
-Pending
 
 ## Credit and Collaborations
 
 [Jelani Rhinehart](https://github.com/Jchips)
  * Made the wireframe with me for Lab07
+
+[Zeegii Ulziibaatar](https://github.com/ZG79)
+* Made the wireframe with me for Lab10
 
 
 ## Development Estimates
