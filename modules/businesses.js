@@ -2,7 +2,7 @@
 
 require('dotenv').config();
 const axios = require('axios');
-const data = require('../data/seattle_businesses.json');
+// const data = require('../data/seattle_businesses.json');
 const cache = require('./cache.js');
 
 const YELPKEY_TOKEN = process.env.YELPKEY;
@@ -17,7 +17,7 @@ function businessesRequest(req,res,next){
   let url = `https://api.yelp.com/v3/businesses/search?sort_by=best_match&limit=20&location=${searchQuery}`;
   // console.log(url);
   if (cache[key] && (Date.now()-cache[key].timestamp<100000000)){
-
+    // console.log('found in cache')
     res.status(200).send(cache[key].data);
   } else {
     // console.log('made new axios request');
@@ -33,22 +33,7 @@ function businessesRequest(req,res,next){
         res.status(200).send(businessesArray);
       })
       .catch(error => next(error));
-  }
-
-  // let businessesQuery = {
-  //   url:`https://api.yelp.com/v3/businesses/search?sort_by=best_match&limit=20&latitude=${lat}&longitude=${lon}`,
-  //   method:'GET',
-  //   headers:{
-  //     Authorization:YELPKEY_TOKEN
-  //   }
-  // };
-  // axios(businessesQuery)
-  //   .then(res => console.log(res))
-  //   .catch(err => next(err));
-
-  // let returnData = new BusinessesFormated(data).getItems();
-  // res.status(200).json(returnData);
-  
+  }  
 }
 
 class BusinessesFormated {

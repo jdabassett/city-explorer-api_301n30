@@ -15,10 +15,10 @@ function weatherRequest(req,res,next){
     method:'GET'};
 
   if (cache[key] && (Date.now()-cache[key].timestamp)<10000000){
-    // console.log('found cache');
+    // console.log('weather-found cache');
     res.status(200).send(cache[key].data);
   } else{
-    // console.log('requested new, added to cache');
+    // console.log('weather-requested new, added to cache');
     axios(weatherQuery)
       .then(res => new Forecast(res))
       .then(forecastObject => forecastObject.getItems())
